@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
-#include "Kismet/BlueprintFunctionLibrary.h"
 #include "StuckInLoopCharacter.generated.h"
 
 class UInputComponent;
@@ -36,23 +35,12 @@ public:
 	/** Returns FirstPersonCameraComponent subobject **/
 	UCameraComponent* GetFirstPersonCameraComponent() const { return FirstPersonCameraComponent; }
 
-public:
-	FORCEINLINE class UPhysicsHandleComponent* GetPhysicsHandle() const { return PhysicsHandle; }
-
-	virtual void Tick(float DeltaTime) override;
-
-protected:
-	virtual void BeginPlay();
-
 protected:
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
-
-protected:
-	void Interact(const FInputActionValue& Value);
 
 protected:
 	// APawn interface
@@ -75,19 +63,4 @@ private:
 	/** Move Input Action */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category=Input, meta=(AllowPrivateAccess = "true"))
 	UInputAction* MoveAction;
-
-private:
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Jam|Components", meta = (AllowPrivateAccess = "true"))
-	class USceneComponent* PhysicsHandleLocation;
-	
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Jam|Components", meta = (AllowPrivateAccess = "true"))
-	class UPhysicsHandleComponent* PhysicsHandle;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Jam|Input", meta = (AllowPrivateAccess = "true"))
-	UInputAction* InteractAction;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Jam|Interaction", meta = (AllowPrivateAccess = "true"))
-	TScriptInterface<class IInteractionInterface> LastInteracted;
-
-	void GetInFrontOfChara(const TEnumAsByte<ECollisionChannel> TraceChannel, float Distance, TArray<class AActor*> ActorsToIgnore, FHitResult& Hit, bool& bDidHit);
 };
