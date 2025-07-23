@@ -25,14 +25,9 @@ void AGrabActor::StartInteraction_Implementation(AActor* Interactor)
 
 	if (const AStuckInLoopCharacter* Chara = Cast<AStuckInLoopCharacter>(Interactor))
 	{
-		if (UPhysicsHandleComponent* Handle = Chara->GetPhysicsHandle())
+		//if (UPhysicsHandleComponent* Handle = Chara->GetPhysicsHandle())
 		{
-			Handle->GrabComponentAtLocationWithRotation(
-				Mesh,
-				FName(),
-				GrabLocation->GetComponentLocation(),
-				GrabLocation->GetComponentRotation()
-			);
+			//Handle->GrabComponentAtLocationWithRotation(Mesh, FName(), GrabLocation->GetComponentLocation(), GrabLocation->GetComponentRotation());
 		}
 	}
 }
@@ -43,9 +38,9 @@ void AGrabActor::EndInteraction_Implementation(AActor* Interactor)
 
 	if (AStuckInLoopCharacter* Chara = Cast<AStuckInLoopCharacter>(Interactor))
 	{
-		if (UPhysicsHandleComponent* Handle = Chara->GetPhysicsHandle())
+		//if (UPhysicsHandleComponent* Handle = Chara->GetPhysicsHandle())
 		{
-			Handle->ReleaseComponent();
+			//Handle->ReleaseComponent();
 		}
 	}
 }
